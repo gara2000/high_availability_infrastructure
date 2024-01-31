@@ -1,0 +1,72 @@
+version: '3'
+services:
+  ansible:
+    image: hiav/ansible:1.0
+    build: 
+      context: ansible
+      dockerfile: Dockerfile
+    networks:
+      - global_network
+
+  infra:
+    image: hiav/infra:1.0
+    build: 
+      context: infra
+      dockerfile: Dockerfile
+    networks:
+      - infra_network
+      - global_network
+    deploy:
+      replicas: 2
+
+  storage:
+    image: hiav/storage:1.0
+    build:
+      context: storage
+      dockerfile: Dockerfile
+    networks:
+      - global_network
+    deploy:
+      replicas: 2
+
+  node:
+    image: hiav/node:1.0
+    build:
+      context: node
+      dockerfile: Dockerfile
+    networks:
+      - global_network
+    deploy:
+      replicas: 2
+    
+  k8s-master:
+    image: hiav/k8s-master:1.0
+    build:
+      context: k8s-master
+      dockerfile: Dockerfile
+    networks:
+      - global_network
+    deploy:
+      replicas: 3
+
+  k8s-worker:
+    image: hiav/k8s-worker:1.0
+    build:
+      context: k8s-worker
+      dockerfile: Dockerfile
+    networks:
+      - global_network
+    deploy:
+      replicas: 4
+
+networks:
+  infra_network:
+    driver: bridge
+    ipam: 
+      config:
+        - subnet: 192.168.1.0/24
+  global_network:
+    driver: bridge
+    ipam: 
+      config:
+        - subnet: 192.168.56.0/24
