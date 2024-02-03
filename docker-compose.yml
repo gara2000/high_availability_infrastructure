@@ -1,9 +1,9 @@
 version: '3'
 services:
-  ansible:
-    image: hiav/ansible:1.0
+  controller:
+    image: hiav/controller:1.0
     build: 
-      context: ansible
+      context: controller
       dockerfile: Dockerfile
     networks:
       - global_network

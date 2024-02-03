@@ -1,0 +1,6 @@
+[Progress]
+  - successfully connected from infra_servers to all the other servers
+  - Now I can start writing ansible playbooks in the infra_servers to provision the other servers
+
+[Notes]
+  - Potentially we could remove the controller server as the two infra servers will be provisioning the rest of the servers
