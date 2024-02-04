@@ -1,13 +1,5 @@
 version: '3'
 services:
-  controller:
-    image: hiav/controller:1.0
-    build: 
-      context: controller
-      dockerfile: Dockerfile
-    networks:
-      - global_network
-
   infra:
     image: hiav/infra:1.0
     build: 

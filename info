@@ -1,6 +1,6 @@
 [Progress]
-  - successfully connected from infra_servers to all the other servers
+  - Build the architecture (docker containers)
+  - Successfully connected from infra_servers to all the other servers (ssh -i .ssh/ed_25591 ansible@<Host_server>)
   - Now I can start writing ansible playbooks in the infra_servers to provision the other servers
 
 [Notes]
-  - Potentially we could remove the controller server as the two infra servers will be provisioning the rest of the servers
