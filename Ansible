@@ -1,0 +1,11 @@
+connectivity|||check the connectivity of the servers|||ansible all --key-file ~/.ssh/ansible -i inventory -m ping
+definition:file:system:inventory|||file in which we specify the different servers we want to provision|||inventory
+definition:file:system:configuration|||configuration file for ansible||| |||in this file we can specify the path to the inventory file and to the key file
+list:inventory:servers|||list all the hosts in the inventory file|||ansible all --list-hosts
+inventory:servers:facts|||gather information about the hosts|||ansible all -m gather_facts|||add option: "--limit <host-address>" to limit the command on the specified host
+operations:servers|||install a new package on all the hosts|||ansible all -m apt -a name=<package-name> --become --ask-become-pass
+operations:servers|||update packages on a host|||ansible all -m apt -a update_cache=true --become --ask-become-pass
+operations:servers|||upgrade a package on a host|||ansible all -m apt -a "name=<package-name> state=latest" --become --ask-become-pass
+operations:servers|||upgrade all the upgradebale packages on a host|||ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
+facts|||the facts can be used with "when": run a play when a fact is equal to value|||when: <fact> == <value>|||(or) when: <fact> in [<value1>, <value2>] and <fact2> == <value>
+modules|||a generic os package manager, depending on the os of the host it will choose the right pakage manager|||package

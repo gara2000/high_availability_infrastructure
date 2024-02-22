@@ -21,20 +21,11 @@ RUN apt update && apt install -y vim
 RUN apt-add-repository -r ppa:ansible/ansible
 RUN apt update && apt install -y ansible
 
-# Installing Docker
-  # Add Docker's official GPG key:
-RUN apt update && apt install -y ca-certificates
-RUN apt update && apt install -y apt-transport-https
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-RUN apt update && apt install -y docker-ce docker-ce-cli
-
 # Creating the ansible user
 RUN groupadd -g 1001 ansible
 RUN useradd -m -s /bin/bash -u 1001 -g ansible -d /home/ansible ansible
 RUN echo "ansible:ansible" | chpasswd
 RUN usermod -aG sudo ansible
-RUN usermod -aG docker ansible
 
 # Copying necessary scripts to be executed in the container
 COPY entry_point.sh /usr/local/bin/entry_point.sh
